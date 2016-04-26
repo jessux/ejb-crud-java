@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMusiquesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid columns="2" class="table">
+
+                    <h:outputLabel value="#{bundle.CreateMusiquesLabel_titre}" for="titre" />
+                    <h:inputText id="titre" value="#{musiquesController.selected.titre}" title="#{bundle.CreateMusiquesTitle_titre}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_titre}"/>
+                    <h:outputLabel value="#{bundle.CreateMusiquesLabel_album}" for="album" />
+                    <h:inputText id="album" value="#{musiquesController.selected.album}" title="#{bundle.CreateMusiquesTitle_album}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_album}"/>
+                    <h:outputLabel value="#{bundle.CreateMusiquesLabel_date}" for="date" />
+                               <ui:remove><!--<h:inputText id="date" value="#{musiquesController.selected.date}" title="#{bundle.CreateMusiquesTitle_date}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_date}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                          </h:inputText>--></ui:remove>
+                    <p:calendar id="popup" value="#{musiquesController.selected.date}">
+                        <f:convertDateTime pattern="dd/MM/yy" />
+                    </p:calendar>
+                    <h:outputLabel value="#{bundle.CreateMusiquesLabel_fichier}" for="fichier" />
+                    <h:inputFile id="fichier" value="#{musiquesController.file}" />
+                    <h:outputLabel value="#{bundle.CreateMusiquesLabel_groupe}" for="groupe" />
+                    <h:inputText id="groupe" value="#{musiquesController.selected.groupe}" title="#{bundle.CreateMusiquesTitle_groupe}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_groupe}"/>
+                    <h:outputLabel value="#{bundle.CreateMusiquesLabel_genre}" for="genre" />
+                    <h:selectOneMenu id="genre" value="#{musiquesController.selected.genre}" title="#{bundle.CreateMusiquesTitle_genre}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_genre}">
+                        <f:selectItems value="#{genreController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink class="btn btn-default" action="#{musiquesController.create}" value="#{bundle.CreateMusiquesSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink class="btn btn-default" action="#{musiquesController.prepareList}" value="#{bundle.CreateMusiquesShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="/index" value="#{bundle.CreateMusiquesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+<!--<h:outputLabel value="#{bundle.CreateMusiquesLabel_idMusique}" for="idMusique" />
+                    <h:inputText id="idMusique" value="#{musiquesController.selected.idMusique}" title="#{bundle.CreateMusiquesTitle_idMusique}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_idMusique}"/>
+
+<h:outputLabel value="#{bundle.CreateMusiquesLabel_fichier}" for="fichier" />
+                    <h:inputText id="fichier" value="#{musiquesController.selected.fichier}" title="#{bundle.CreateMusiquesTitle_fichier}" required="true" requiredMessage="#{bundle.CreateMusiquesRequiredMessage_fichier}"/>-->
+</html>

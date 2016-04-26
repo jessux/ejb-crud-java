@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>LK-MyMedia
+        </title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <script src="https://raw.github.com/LeaVerou/prefixfree/gh-pages/prefixfree.min.js"></script> <!-- Fichier JavaScript assure support CSS3   -->
+    </h:head>
+    <h:body>
+        
+        <div id="galerie-menu">
+            <nav>
+
+                <h:link outcome="/films/List" title="Liste des films">
+                    <h:graphicImage value="/resources/images/Film.jpg" class="menu" />
+                </h:link>
+
+                <h:link outcome="/musiques/List" title="Liste des musiques" >
+                    <h:graphicImage value="/resources/images/musique.jpg" class="menu" />
+                </h:link>
+                <h:link outcome="/genre/List" title="Liste des genres" >
+                    <h:graphicImage value="/resources/images/genre-musique.jpg" class="menu" />
+                </h:link>
+                <h:link outcome="/categories/List" title="Liste des categories">
+                    <h:graphicImage value="/resources/images/Film-Genres.png" class="menu" />
+                </h:link>
+            </nav>
+        </div>
+        
+        <h1 style="float: bottom; position: absolute; right: 20px; bottom: 20px;">Lacroix Kahlouche Medias</h1>
+    </h:body>
+
+
+
+
+</html>
+

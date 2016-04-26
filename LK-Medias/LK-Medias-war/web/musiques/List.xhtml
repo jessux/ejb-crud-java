@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMusiquesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListMusiquesEmpty}" rendered="#{musiquesController.items.rowCount == 0}"/>
+                <br />
+                <h:panelGroup rendered="#{musiquesController.items.rowCount > 0}">
+                    <h:outputText value="#{musiquesController.pagination.pageFirstItem + 1}..#{musiquesController.pagination.pageLastItem + 1}/#{musiquesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink class="btn btn-default" action="#{musiquesController.previous}" value="#{bundle.Previous} #{musiquesController.pagination.pageSize}" rendered="#{musiquesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink class="btn btn-default" action="#{musiquesController.next}" value="#{bundle.Next} #{musiquesController.pagination.pageSize}" rendered="#{musiquesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{musiquesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" class="table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMusiquesTitle_titre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMusiquesTitle_album}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.album}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMusiquesTitle_date}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.date}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMusiquesTitle_fichier}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fichier}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMusiquesTitle_groupe}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.groupe}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMusiquesTitle_genre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.genre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink class="btn btn-primary" action="#{musiquesController.prepareView}" value="#{bundle.ListMusiquesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink class="btn btn-default" action="#{musiquesController.prepareEdit}" value="#{bundle.ListMusiquesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink class="btn btn-danger" action="#{musiquesController.destroy}" value="#{bundle.ListMusiquesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink class="btn btn-default" action="#{musiquesController.prepareCreate}" value="#{bundle.ListMusiquesCreateLink}"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="/index" value="#{bundle.ListMusiquesIndexLink}"/>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

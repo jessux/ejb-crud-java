@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListGenreTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListGenreEmpty}" rendered="#{genreController.items.rowCount == 0}"/>
+                <br />
+                <h:panelGroup rendered="#{genreController.items.rowCount > 0}">
+                    <h:outputText value="#{genreController.pagination.pageFirstItem + 1}..#{genreController.pagination.pageLastItem + 1}/#{genreController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink class="btn btn-default" action="#{genreController.previous}" value="#{bundle.Previous} #{genreController.pagination.pageSize}" rendered="#{genreController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink class="btn btn-default" action="#{genreController.next}" value="#{bundle.Next} #{genreController.pagination.pageSize}" rendered="#{genreController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{genreController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" class="table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGenreTitle_idGenre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idGenre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink class="btn btn-primary" action="#{genreController.prepareView}" value="#{bundle.ListGenreViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink class="btn btn-default" action="#{genreController.prepareEdit}" value="#{bundle.ListGenreEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink class="btn btn-danger" action="#{genreController.destroy}" value="#{bundle.ListGenreDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink class="btn btn-default" action="#{genreController.prepareCreate}" value="#{bundle.ListGenreCreateLink}"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="/index" value="#{bundle.ListGenreIndexLink}"/>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

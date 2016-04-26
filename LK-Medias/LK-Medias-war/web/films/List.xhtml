@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListFilmsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            
+                <h:form styleClass="jsfcrud_list_form">
+                    <h:panelGroup id="messagePanel" layout="block">
+                        <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                    </h:panelGroup>
+                    <h:outputText escape="false" value="#{bundle.ListFilmsEmpty}" rendered="#{filmsController.items.rowCount == 0}"/>
+                    <br />
+                    <h:panelGroup rendered="#{filmsController.items.rowCount > 0}">
+                        <h:outputText value="#{filmsController.pagination.pageFirstItem + 1}..#{filmsController.pagination.pageLastItem + 1}/#{filmsController.pagination.itemsCount}"/>&nbsp;
+                        <h:commandLink class="btn btn-default" action="#{filmsController.previous}" value="#{bundle.Previous} #{filmsController.pagination.pageSize}" rendered="#{filmsController.pagination.hasPreviousPage}"/>&nbsp;
+                        <h:commandLink class="btn btn-default" action="#{filmsController.next}" value="#{bundle.Next} #{filmsController.pagination.pageSize}" rendered="#{filmsController.pagination.hasNextPage}"/>&nbsp;
+                        <h:dataTable value="#{filmsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" class="table">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListFilmsTitle_date}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.date}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListFilmsTitle_description}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.description}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListFilmsTitle_fichier}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fichier}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListFilmsTitle_nom}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nom}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{bundle.ListFilmsTitle_categorie}"/>
+                                </f:facet>
+                                <h:outputText value="#{item.categorie}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="&nbsp;"/>
+                                </f:facet>
+                                <h:commandLink class="btn btn-primary" action="#{filmsController.prepareView}" value="#{bundle.ListFilmsViewLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-default" action="#{filmsController.prepareEdit}" value="#{bundle.ListFilmsEditLink}"/>
+                                <h:outputText value=" "/>
+                                <h:commandLink class="btn btn-danger" action="#{filmsController.destroy}" value="#{bundle.ListFilmsDestroyLink}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <br />
+                    <h:commandLink class="btn btn-default" action="#{filmsController.prepareCreate}" value="#{bundle.ListFilmsCreateLink}"/>
+                    <br />
+                    <br />
+                    <h:link class="btn btn-default" outcome="/index" value="#{bundle.ListFilmsIndexLink}"/>
+                </h:form>
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

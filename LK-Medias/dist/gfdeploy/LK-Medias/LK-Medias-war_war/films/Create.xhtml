@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateFilmsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid columns="2" class="table">
+                    
+                    <h:outputLabel value="#{bundle.CreateFilmsLabel_date}" for="date" />
+                               <ui:remove><!--<h:inputText id="date" value="#{filmsController.selected.date}" title="#{bundle.CreateFilmsTitle_date}" required="true" requiredMessage="#{bundle.CreateFilmsRequiredMessage_date}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                          </h:inputText>--></ui:remove>
+                    <p:calendar id="popup" value="#{filmsController.selected.date}">
+                    
+                        <f:convertDateTime pattern="dd/MM/yy" />
+                    </p:calendar>
+                    
+                    <h:outputLabel value="#{bundle.CreateFilmsLabel_description}" for="description" />
+                    <h:inputText id="description" value="#{filmsController.selected.description}" title="#{bundle.CreateFilmsTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateFilmsLabel_fichier}" for="fichier" />
+                    <h:inputFile id="fichier" value="#{filmsController.file}" />
+                    <h:outputLabel value="#{bundle.CreateFilmsLabel_nom}" for="nom" />
+                    <h:inputText id="nom" value="#{filmsController.selected.nom}" title="#{bundle.CreateFilmsTitle_nom}" required="true" requiredMessage="#{bundle.CreateFilmsRequiredMessage_nom}"/>
+                    <h:outputLabel value="#{bundle.CreateFilmsLabel_categorie}" for="categorie" />
+                    <h:selectOneMenu id="categorie" value="#{filmsController.selected.categorie}" title="#{bundle.CreateFilmsTitle_categorie}" required="true" requiredMessage="#{bundle.CreateFilmsRequiredMessage_categorie}">
+                        <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{filmsController.create}" value="#{bundle.CreateFilmsSaveLink}" class="btn btn-default"/>
+                <h:commandLink action="#{filmsController.prepareList}" value="#{bundle.CreateFilmsShowAllLink}" immediate="true" class="btn btn-default"/>
+                
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateFilmsIndexLink}" class="btn btn-default"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+  <!--<h:inputText id="fichier" value="#{filmsController.selected.fichier}" title="#{bundle.CreateFilmsTitle_fichier}" required="true" requiredMessage="#{bundle.CreateFilmsRequiredMessage_fichier}"/>-->
+                <!--<h:outputLabel value="#{bundle.CreateFilmsLabel_idFilm}" for="idFilm" />
+                <h:inputText id="idFilm" value="#{filmsController.selected.idFilm}" title="#{bundle.CreateFilmsTitle_idFilm}" required="false" requiredMessage="#{bundle.CreateFilmsRequiredMessage_idFilm}"/>-->
+</html>

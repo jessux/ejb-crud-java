@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMusiquesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                               <ui:remove><!--<h:outputText value="#{bundle.ViewMusiquesLabel_idMusique}"/>
+                                          <h:outputText value="#{musiquesController.selected.idMusique}" title="#{bundle.ViewMusiquesTitle_idMusique}"/>--></ui:remove>
+                    <h:outputText value="#{bundle.ViewMusiquesLabel_titre}"/>
+                    <h:outputText value="#{musiquesController.selected.titre}" title="#{bundle.ViewMusiquesTitle_titre}"/>
+                    <h:outputText value="#{bundle.ViewMusiquesLabel_album}"/>
+                    <h:outputText value="#{musiquesController.selected.album}" title="#{bundle.ViewMusiquesTitle_album}"/>
+                    <h:outputText value="#{bundle.ViewMusiquesLabel_date}"/>
+                    <h:outputText value="#{musiquesController.selected.date}" title="#{bundle.ViewMusiquesTitle_date}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewMusiquesLabel_fichier}"/>
+                    <h:outputText value="#{musiquesController.selected.fichier}" title="#{bundle.ViewMusiquesTitle_fichier}"/>
+                    <h:outputText value="#{bundle.ViewMusiquesLabel_groupe}"/>
+                    <h:outputText value="#{musiquesController.selected.groupe}" title="#{bundle.ViewMusiquesTitle_groupe}"/>
+                    <h:outputText value="#{bundle.ViewMusiquesLabel_genre}"/>
+                    <h:outputText value="#{musiquesController.selected.genre}" title="#{bundle.ViewMusiquesTitle_genre}"/>
+                </h:panelGrid>
+
+                <audio src="http://192.168.85.139/musiques/#{musiquesController.selected.fichier}" controls="controls"><a href="http://192.168.85.139/musiques/#{musiquesController.selected.fichier}">Ecouter la musique</a></audio>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />                
+                <h:commandLink class="btn btn-default" action="#{musiquesController.destroyAndView}" value="#{bundle.ViewMusiquesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="Edit" value="#{bundle.ViewMusiquesEditLink}"/>
+                <br />
+                <h:commandLink class="btn btn-default" action="#{musiquesController.prepareCreate}" value="#{bundle.ViewMusiquesCreateLink}" />
+                <br />
+                <h:commandLink class="btn btn-default" action="#{musiquesController.prepareList}" value="#{bundle.ViewMusiquesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="/index" value="#{bundle.ViewMusiquesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

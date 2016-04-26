@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewFilmsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewFilmsLabel_date}"/>
+                    <h:outputText value="#{filmsController.selected.date}" title="#{bundle.ViewFilmsTitle_date}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewFilmsLabel_description}"/>
+                    <h:outputText value="#{filmsController.selected.description}" title="#{bundle.ViewFilmsTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewFilmsLabel_fichier}"/>
+                    <h:outputText value="#{filmsController.selected.fichier}" title="#{bundle.ViewFilmsTitle_fichier}"/>
+                               <ui:remove><!--<h:outputText value="#{bundle.ViewFilmsLabel_idFilm}"/>
+                                          <h:outputText value="#{filmsController.selected.idFilm}" title="#{bundle.ViewFilmsTitle_idFilm}"/>--></ui:remove>
+                    <h:outputText value="#{bundle.ViewFilmsLabel_nom}"/>
+                    <h:outputText value="#{filmsController.selected.nom}" title="#{bundle.ViewFilmsTitle_nom}"/>
+                    <h:outputText value="#{bundle.ViewFilmsLabel_categorie}"/>
+                    <h:outputText value="#{filmsController.selected.categorie}" title="#{bundle.ViewFilmsTitle_categorie}"/>
+                </h:panelGrid>
+                
+                <br />
+                <video src="http://192.168.85.139/films/#{filmsController.selected.fichier}" width="800" height="450" controls="controls">
+                    <a href="http://192.168.85.139/films/#{filmsController.selected.fichier}">Voir la video</a>
+                </video>
+                <br />
+                <br />
+                <br />
+                <h:commandLink class="btn btn-default" action="#{filmsController.destroyAndView}" value="#{bundle.ViewFilmsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="Edit" value="#{bundle.ViewFilmsEditLink}"/>
+                <br />
+                <h:commandLink class="btn btn-default" action="#{filmsController.prepareCreate}" value="#{bundle.ViewFilmsCreateLink}" />
+                <br />
+                <h:commandLink class="btn btn-default" action="#{filmsController.prepareList}" value="#{bundle.ViewFilmsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link class="btn btn-default" outcome="/index" value="#{bundle.ViewFilmsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
